@@ -7,7 +7,7 @@ var Card = React.createClass({
 
   componentDidMount: function() {
     var component = this;
-    $.get( "https://api.github.com/users/kitlangton", function(data){
+    $.get( "https://api.github.com/users/" + this.props.login, function(data){
       component.setState( data );
     } );
   },
@@ -30,7 +30,10 @@ var Main = React.createClass({
   render: function() {
     return (
       <div>
-        <Card/>
+        <Card login="spicyj"/>
+        <Card login="petehunt"/>
+        <Card login="koziscool"/>
+        <Card login="kitlangton"/>
       </div>
     )
   }
