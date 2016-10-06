@@ -24,11 +24,34 @@ var Card = React.createClass({
 
 });
 
+var Form = React.createClass({
+  
+  handleSubmit: function(e){
+    e.preventDefault();
+    var loginInput = this.refs.login;
+    this.props.addCard( loginInput.value );
+    loginInput.value = '';
+  },
+
+  render: function() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input placeholder="github login" ref="login"/>
+        <button>Add</button>
+      </form>
+    )
+  }
+});
+
 
 var Main = React.createClass({
   
   getInitialState: function() {
     return { logins: ['zpao', 'fisherwebdev' ] };
+  },
+
+  addCard: function( loginToAdd ) {
+    this.setState( { logins: this.state.logins.concat(loginToAdd) });
   },
 
   render: function() {
@@ -38,7 +61,8 @@ var Main = React.createClass({
 
     return (
       <div>
-      { cards }
+      <Form addCard={this.addCard} />
+        { cards }
       </div>
     )
   }
